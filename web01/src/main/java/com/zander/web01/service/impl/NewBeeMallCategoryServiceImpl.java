@@ -69,4 +69,9 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
         //删除分类数据
         return goodsCategoryDao.deleteBatch(ids) > 0;
     }
+
+    @Override
+    public List<GoodsCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel) {
+        return goodsCategoryDao.selectByLevelAndParentIdsAndNumber(parentIds, categoryLevel, 0);//0代表查询所有
+    }
 }

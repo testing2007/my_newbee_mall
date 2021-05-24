@@ -23,6 +23,58 @@ public class NewBeeMallGoodsCategoryController {
     @Resource
     private NewBeeMallCategoryService newBeeMallCategoryService;
 
+    @GetMapping("/coupling-test")
+    public String couplingTest(HttpServletRequest request) {
+//        return "admin/coupling-test"; //调用 resources/templates/admin/coupling-test.html 页面
+        request.setAttribute("path", "coupling-test");
+        //查询所有的一级分类
+        List<GoodsCategory> firstLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), NewBeeMallCategoryLevelEnum.LEVEL_ONE.getLevel());
+        if (!CollectionUtils.isEmpty(firstLevelCategories)) {
+            //查询一级分类列表中第一个实体的所有二级分类
+            List<GoodsCategory> secondLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(firstLevelCategories.get(0).getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_TWO.getLevel());
+            if (!CollectionUtils.isEmpty(secondLevelCategories)) {
+                //查询二级分类列表中第一个实体的所有三级分类
+                List<GoodsCategory> thirdLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel());
+                request.setAttribute("firstLevelCategories", firstLevelCategories);
+                request.setAttribute("secondLevelCategories", secondLevelCategories);
+                request.setAttribute("thirdLevelCategories", thirdLevelCategories);
+                return "admin/coupling-test";
+            }
+        }
+        return "error/error_5xx";
+    }
+
+    @RequestMapping(value = "/categories/listForSelect", method = RequestMethod.GET)
+    @ResponseBody
+    public Result listForSelect(@RequestParam("categoryId") Long categoryId) {
+        if (categoryId == null || categoryId < 1) {
+            return ResultGenerator.genFailResult("缺少参数！");
+        }
+        GoodsCategory category = newBeeMallCategoryService.getGoodsCategoryById(categoryId);
+        //既不是一级分类也不是二级分类则为不返回数据
+        if (category == null || category.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel()) {
+            return ResultGenerator.genFailResult("参数异常！");
+        }
+        Map categoryResult = new HashMap(2);
+        if (category.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_ONE.getLevel()) {
+            //如果是一级分类则返回当前一级分类下的所有二级分类，以及二级分类列表中第一条数据下的所有三级分类列表
+            //查询一级分类列表中第一个实体的所有二级分类
+            List<GoodsCategory> secondLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), NewBeeMallCategoryLevelEnum.LEVEL_TWO.getLevel());
+            if (!CollectionUtils.isEmpty(secondLevelCategories)) {
+                //查询二级分类列表中第一个实体的所有三级分类
+                List<GoodsCategory> thirdLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelCategories.get(0).getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel());
+                categoryResult.put("secondLevelCategories", secondLevelCategories);
+                categoryResult.put("thirdLevelCategories", thirdLevelCategories);
+            }
+        }
+        if (category.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_TWO.getLevel()) {
+            //如果是二级分类则返回当前分类下的所有三级分类列表
+            List<GoodsCategory> thirdLevelCategories = newBeeMallCategoryService.selectByLevelAndParentIdsAndNumber(Collections.singletonList(categoryId), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel());
+            categoryResult.put("thirdLevelCategories", thirdLevelCategories);
+        }
+        return ResultGenerator.genSuccessResult(categoryResult);
+    }
+
     /**
      *
      * @param request

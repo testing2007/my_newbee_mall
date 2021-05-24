@@ -27,5 +27,6 @@ public interface GoodsCategoryDao {
 
     int deleteBatch(Integer[] ids);
 
+    //分类接口联动时调用
     List<GoodsCategory> selectByLevelAndParentIdsAndNumber(@Param("parentIds") List<Long> parentIds, @Param("categoryLevel") int categoryLevel, @Param("number") int number);
 }

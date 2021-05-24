@@ -8,6 +8,7 @@
  */
 package com.zander.web01.control.admin;
 
+import com.zander.web01.bean.GoodsCategory;
 import com.zander.web01.common.ServiceResultEnum;
 import com.zander.web01.bean.AdminUser;
 import com.zander.web01.service.AdminUserService;
