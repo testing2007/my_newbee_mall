@@ -1,12 +1,10 @@
 package com.zander.web01.common;
 
 /**
- * 严肃声明：
- * 开源版本请务必保留此注释头信息，若删除我方将保留所有法律责任追究！
- * 本系统已申请软件著作权，受国家版权局知识产权以及国家计算机软件著作权保护！
- * 可正常分享和学习源码，不得用于违法犯罪活动，违者必究！
- * Copyright (c) 2019-2020 十三 all rights reserved.
- * 版权所有，侵权必究！
+ * @author 13
+ * @qq交流群 796794009
+ * @email 2449207463@qq.com
+ * @link https://github.com/newbee-ltd
  */
 public enum ServiceResultEnum {
     ERROR("error"),
@@ -15,7 +13,7 @@ public enum ServiceResultEnum {
 
     DATA_NOT_EXIST("未查询到记录！"),
 
-    SAME_CATEGORY_EXIST("已存在同级同名的分类！"),
+    SAME_CATEGORY_EXIST("有同级同名的分类！"),
 
     SAME_LOGIN_NAME_EXIST("用户名已存在！"),
 
@@ -27,19 +25,11 @@ public enum ServiceResultEnum {
 
     LOGIN_VERIFY_CODE_ERROR("验证码错误！"),
 
-    SAME_INDEX_CONFIG_EXIST("已存在相同的首页配置项！"),
-
-    GOODS_CATEGORY_ERROR("分类数据异常！"),
-
-    SAME_GOODS_EXIST("已存在相同的商品信息！"),
-
     GOODS_NOT_EXIST("商品不存在！"),
 
     GOODS_PUT_DOWN("商品已下架！"),
 
     SHOPPING_CART_ITEM_LIMIT_NUMBER_ERROR("超出单个商品的最大购买数量！"),
-
-    SHOPPING_CART_ITEM_TOTAL_NUMBER_ERROR("超出购物车最大容量！"),
 
     LOGIN_ERROR("登录失败！"),
 
@@ -60,8 +50,6 @@ public enum ServiceResultEnum {
     ORDER_STATUS_ERROR("订单状态异常！"),
 
     OPERATE_ERROR("操作失败！"),
-
-    NO_PERMISSION_ERROR("无权限！"),
 
     DB_ERROR("database error");
 
