@@ -1,6 +1,7 @@
 package com.zander.web01.service;
 
 import com.zander.web01.bean.GoodsCategory;
+import com.zander.web01.control.vo.NewBeeMallIndexCategoryVO;
 import com.zander.web01.util.PageQueryUtil;
 import com.zander.web01.util.PageResult;
 
@@ -25,4 +26,11 @@ public interface NewBeeMallCategoryService {
      * @return
      */
     List<GoodsCategory> selectByLevelAndParentIdsAndNumber(List<Long> parentIds, int categoryLevel);
+
+    /**
+     * 返回分类数据(首页调用)
+     *
+     * @return
+     */
+    List<NewBeeMallIndexCategoryVO> getCategoriesForIndex();
 }

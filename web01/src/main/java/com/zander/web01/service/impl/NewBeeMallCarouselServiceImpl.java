@@ -1,16 +1,24 @@
 package com.zander.web01.service.impl;
 
+import com.zander.web01.bean.GoodsCategory;
 import com.zander.web01.common.ServiceResultEnum;
+import com.zander.web01.control.vo.NewBeeMallIndexCarouselVO;
+import com.zander.web01.control.vo.NewBeeMallIndexCategoryVO;
+import com.zander.web01.control.vo.SecondLevelCategoryVO;
 import com.zander.web01.dao.CarouselDao;
 import com.zander.web01.bean.Carousel;
 import com.zander.web01.service.NewBeeMallCarouselService;
+import com.zander.web01.util.BeanUtil;
 import com.zander.web01.util.PageQueryUtil;
 import com.zander.web01.util.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService {
@@ -62,5 +70,15 @@ public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService 
         }
         //删除数据
         return carouselMapper.deleteBatch(ids) > 0;
+    }
+
+    @Override
+    public List<NewBeeMallIndexCarouselVO> getCarouselsForIndex(int number) {
+        List<NewBeeMallIndexCarouselVO> newBeeMallIndexCarouselVOS = new ArrayList<>(number);
+        List<Carousel> carousels = carouselMapper.findCarouselsByNum(number);
+        if (!CollectionUtils.isEmpty(carousels)) {
+            newBeeMallIndexCarouselVOS = BeanUtil.copyList(carousels, NewBeeMallIndexCarouselVO.class);
+        }
+        return newBeeMallIndexCarouselVOS;
     }
 }
