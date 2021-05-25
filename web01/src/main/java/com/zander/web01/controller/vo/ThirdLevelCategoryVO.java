@@ -1,4 +1,4 @@
-package com.zander.web01.control.vo;
+package com.zander.web01.controller.vo;
 
 import lombok.Data;
 

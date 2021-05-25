@@ -1,10 +1,7 @@
 package com.zander.web01.service.impl;
 
-import com.zander.web01.bean.GoodsCategory;
 import com.zander.web01.common.ServiceResultEnum;
-import com.zander.web01.control.vo.NewBeeMallIndexCarouselVO;
-import com.zander.web01.control.vo.NewBeeMallIndexCategoryVO;
-import com.zander.web01.control.vo.SecondLevelCategoryVO;
+import com.zander.web01.controller.vo.NewBeeMallIndexCarouselVO;
 import com.zander.web01.dao.CarouselDao;
 import com.zander.web01.bean.Carousel;
 import com.zander.web01.service.NewBeeMallCarouselService;
@@ -18,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class NewBeeMallCarouselServiceImpl implements NewBeeMallCarouselService {

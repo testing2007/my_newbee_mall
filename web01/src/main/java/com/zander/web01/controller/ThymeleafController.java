@@ -1,4 +1,4 @@
-package com.zander.web01.control;
+package com.zander.web01.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

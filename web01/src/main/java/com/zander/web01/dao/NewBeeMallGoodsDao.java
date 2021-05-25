@@ -26,4 +26,6 @@ public interface NewBeeMallGoodsDao {
     int getTotalNewBeeMallGoods(PageQueryUtil pageUtil);
 
     int batchUpdateSellStatus(@Param("orderIds") Long[] orderIds, @Param("sellStatus") int sellStatus);
+
+    List<NewBeeMallGoods> selectByPrimaryKeys(List<Long> goodsIds);
 }

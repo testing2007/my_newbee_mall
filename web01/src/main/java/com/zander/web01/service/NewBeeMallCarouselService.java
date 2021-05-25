@@ -1,7 +1,7 @@
 package com.zander.web01.service;
 
 import com.zander.web01.bean.Carousel;
-import com.zander.web01.control.vo.NewBeeMallIndexCarouselVO;
+import com.zander.web01.controller.vo.NewBeeMallIndexCarouselVO;
 import com.zander.web01.util.PageQueryUtil;
 import com.zander.web01.util.PageResult;
 

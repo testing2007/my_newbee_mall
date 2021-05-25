@@ -1,4 +1,4 @@
-package com.zander.web01.control;
+package com.zander.web01.controller;
 
 import com.zander.web01.bean.User;
 import com.zander.web01.dao.UserDao;

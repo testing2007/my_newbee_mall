@@ -1,7 +1,7 @@
 package com.zander.web01.service;
 
 import com.zander.web01.bean.GoodsCategory;
-import com.zander.web01.control.vo.NewBeeMallIndexCategoryVO;
+import com.zander.web01.controller.vo.NewBeeMallIndexCategoryVO;
 import com.zander.web01.util.PageQueryUtil;
 import com.zander.web01.util.PageResult;
 

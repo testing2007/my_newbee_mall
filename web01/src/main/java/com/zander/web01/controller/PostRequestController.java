@@ -1,4 +1,4 @@
-package com.zander.web01.control;
+package com.zander.web01.controller;
 
 import com.zander.web01.bean.SaleGoods;
 import org.springframework.web.bind.annotation.RequestBody;

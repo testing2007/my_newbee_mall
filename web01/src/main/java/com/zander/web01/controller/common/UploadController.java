@@ -1,4 +1,4 @@
-package com.zander.web01.control.common;
+package com.zander.web01.controller.common;
 
 import com.zander.web01.common.Constants;
 import com.zander.web01.util.NewBeeMallUtils;

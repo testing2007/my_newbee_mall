@@ -1,4 +1,4 @@
-package com.zander.web01.control;
+package com.zander.web01.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import org.springframework.beans.factory.annotation.Autowired;
