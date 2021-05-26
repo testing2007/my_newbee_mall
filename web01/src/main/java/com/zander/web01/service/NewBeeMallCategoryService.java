@@ -2,6 +2,7 @@ package com.zander.web01.service;
 
 import com.zander.web01.bean.GoodsCategory;
 import com.zander.web01.controller.vo.NewBeeMallIndexCategoryVO;
+import com.zander.web01.controller.vo.SearchPageCategoryVO;
 import com.zander.web01.util.PageQueryUtil;
 import com.zander.web01.util.PageResult;
 
@@ -33,4 +34,12 @@ public interface NewBeeMallCategoryService {
      * @return
      */
     List<NewBeeMallIndexCategoryVO> getCategoriesForIndex();
+
+    /**
+     * 返回分类数据(搜索页调用)
+     *
+     * @param categoryId
+     * @return
+     */
+    SearchPageCategoryVO getCategoriesForSearch(Long categoryId);
 }

@@ -4,6 +4,7 @@ import com.zander.web01.common.Constants;
 import com.zander.web01.common.NewBeeMallCategoryLevelEnum;
 import com.zander.web01.common.ServiceResultEnum;
 import com.zander.web01.controller.vo.NewBeeMallIndexCategoryVO;
+import com.zander.web01.controller.vo.SearchPageCategoryVO;
 import com.zander.web01.controller.vo.SecondLevelCategoryVO;
 import com.zander.web01.controller.vo.ThirdLevelCategoryVO;
 import com.zander.web01.dao.GoodsCategoryDao;
@@ -136,4 +137,24 @@ public class NewBeeMallCategoryServiceImpl implements NewBeeMallCategoryService 
             return null;
         }
     }
+
+    @Override
+    public SearchPageCategoryVO getCategoriesForSearch(Long categoryId) {
+        SearchPageCategoryVO searchPageCategoryVO = new SearchPageCategoryVO();
+        GoodsCategory thirdLevelGoodsCategory = goodsCategoryDao.selectByPrimaryKey(categoryId);
+        if (thirdLevelGoodsCategory != null && thirdLevelGoodsCategory.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel()) {
+            //获取当前三级分类的二级分类
+            GoodsCategory secondLevelGoodsCategory = goodsCategoryDao.selectByPrimaryKey(thirdLevelGoodsCategory.getParentId());
+            if (secondLevelGoodsCategory != null && secondLevelGoodsCategory.getCategoryLevel() == NewBeeMallCategoryLevelEnum.LEVEL_TWO.getLevel()) {
+                //获取当前二级分类下的三级分类List
+                List<GoodsCategory> thirdLevelCategories = goodsCategoryDao.selectByLevelAndParentIdsAndNumber(Collections.singletonList(secondLevelGoodsCategory.getCategoryId()), NewBeeMallCategoryLevelEnum.LEVEL_THREE.getLevel(), Constants.SEARCH_CATEGORY_NUMBER);
+                searchPageCategoryVO.setCurrentCategoryName(thirdLevelGoodsCategory.getCategoryName());
+                searchPageCategoryVO.setSecondLevelCategoryName(secondLevelGoodsCategory.getCategoryName());
+                searchPageCategoryVO.setThirdLevelCategoryList(thirdLevelCategories);
+                return searchPageCategoryVO;
+            }
+        }
+        return null;
+    }
+
 }

@@ -28,4 +28,8 @@ public interface NewBeeMallGoodsDao {
     int batchUpdateSellStatus(@Param("orderIds") Long[] orderIds, @Param("sellStatus") int sellStatus);
 
     List<NewBeeMallGoods> selectByPrimaryKeys(List<Long> goodsIds);
+
+    List<NewBeeMallGoods> findNewBeeMallGoodsListBySearch(PageQueryUtil pageUtil);
+
+    int getTotalNewBeeMallGoodsBySearch(PageQueryUtil pageUtil);
 }
