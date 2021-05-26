@@ -2,6 +2,7 @@ package com.zander.web01.config;
 
 import com.zander.web01.common.Constants;
 import com.zander.web01.interceptor.AdminLoginInterceptor;
+import com.zander.web01.interceptor.NewBeeMallCartNumberInterceptor;
 import com.zander.web01.interceptor.NewBeeMallLoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,8 @@ public class NeeBeeMallWebMvcConfigurer implements WebMvcConfigurer {
     private AdminLoginInterceptor adminLoginInterceptor;
     @Autowired
     private NewBeeMallLoginInterceptor newBeeMallLoginInterceptor;
+    @Autowired
+    private NewBeeMallCartNumberInterceptor newBeeMallCartNumberInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(adminLoginInterceptor)
@@ -41,6 +44,13 @@ public class NeeBeeMallWebMvcConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/orders/**")
                 .addPathPatterns("/selectPayType")
                 .addPathPatterns("/payPage");
+
+        // 购物车中的数量统一处理
+        registry.addInterceptor(newBeeMallCartNumberInterceptor)
+                .excludePathPatterns("/admin/**")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/logout");
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

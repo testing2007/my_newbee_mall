@@ -1,13 +1,17 @@
 package com.zander.web01.controller.mall;
 
+import com.zander.web01.bean.NewBeeMallGoods;
 import com.zander.web01.common.Constants;
+import com.zander.web01.controller.vo.NewBeeMallGoodsDetailVO;
 import com.zander.web01.controller.vo.SearchPageCategoryVO;
 import com.zander.web01.service.NewBeeMallCategoryService;
 import com.zander.web01.service.NewBeeMallGoodsService;
+import com.zander.web01.util.BeanUtil;
 import com.zander.web01.util.PageQueryUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
@@ -52,5 +56,20 @@ public class GoodsController {
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         request.setAttribute("pageResult", newBeeMallGoodsService.searchNewBeeMallGoods(pageUtil));
         return "mall/search";
+    }
+
+    @GetMapping("/goods/detail/{goodsId}")
+    public String detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request) {
+        if (goodsId < 1) {
+            return "error/error_5xx";
+        }
+        NewBeeMallGoods goods = newBeeMallGoodsService.getNewBeeMallGoodsById(goodsId);
+        if (goods == null) {
+            return "error/error_404";
+        }
+        NewBeeMallGoodsDetailVO goodsDetailVO = new NewBeeMallGoodsDetailVO();
+        BeanUtil.copyProperties(goods, goodsDetailVO);
+        request.setAttribute("goodsDetail", goodsDetailVO);
+        return "mall/detail";
     }
 }
