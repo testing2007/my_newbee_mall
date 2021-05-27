@@ -1,6 +1,7 @@
 package com.zander.web01.dao;
 
 import com.zander.web01.bean.NewBeeMallGoods;
+import com.zander.web01.bean.StockNumDTO;
 import com.zander.web01.util.PageQueryUtil;
 import org.apache.ibatis.annotations.Param;
 
@@ -32,4 +33,7 @@ public interface NewBeeMallGoodsDao {
     List<NewBeeMallGoods> findNewBeeMallGoodsListBySearch(PageQueryUtil pageUtil);
 
     int getTotalNewBeeMallGoodsBySearch(PageQueryUtil pageUtil);
+
+    // 更新库存（比如下完订单）
+    int updateStockNum(@Param("stockNumDTOS") List<StockNumDTO> stockNumDTOS);
 }

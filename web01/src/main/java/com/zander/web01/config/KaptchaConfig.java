@@ -20,7 +20,7 @@ public class KaptchaConfig {
         // 图片宽
         properties.put("kaptcha.image.width", "160");
         // 图片高
-        properties.put("kaptcha.image.height", "40");
+        properties.put("kaptcha.image.height", "50");
         // 字体大小
         properties.put("kaptcha.textproducer.font.size", "30");
         // 验证码长度
